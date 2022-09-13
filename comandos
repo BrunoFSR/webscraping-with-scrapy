@@ -1,0 +1,7 @@
+pip install scrapy
+scrapy startproject robo_aj
+cd robo_aj
+scrapy genspider spider_aj del.com
+
+EXECUTAR
+scrapy crawl robo_aj -O arquivo.csv
