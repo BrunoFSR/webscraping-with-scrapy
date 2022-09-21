@@ -7,6 +7,8 @@ import csv
 class SpiderAjSpider(scrapy.Spider):
     name = 'spider_criticas_jn'
     
+    ## https://jovemnerd.com.br/bunker/categoria/criticas/
+    ## https://api.jovemnerd.com.br/wp-json/jovemnerd/v1/nerdbunker?per_page=28&page=2&category=Críticas
     start_urls = ['https://jovemnerd.com.br/bunker/categoria/criticas/']
 
     if os.path.exists("jovemnerd-criticas.csv"):
@@ -15,6 +17,7 @@ class SpiderAjSpider(scrapy.Spider):
     # função que interpreta a página que exibe 250 filmes com as maiores notas
     def parse(self, response):
         for link in response.css("h2.title").css("a::attr(href)").getall():
+            print(link)
             yield scrapy.Request(link, callback=self.parse_movie)
     
     # função que consulta as informações dos filmes
